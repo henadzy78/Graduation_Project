@@ -9,7 +9,7 @@ import pages.LoginPage;
 public class IncorrectDataTest extends BaseTest {
 
     @Test(description = "Incorrect data entry test")
-    public void IncorrectDataTest() {
+    public void incorrectDataTest() {
         User user = User.builder()
                 .email("genabox78@gmail.com")
                 .password("jhnkkljsdaga")

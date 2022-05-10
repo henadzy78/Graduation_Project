@@ -12,20 +12,20 @@ import pages.LoginPage;
 import pages.MainProjectsPage;
 import utils.Randomization;
 
-public class DialogWindowTest extends BaseTest {
+public class LimitTest extends BaseTest {
     Project newProject;
-    
-    public void createProject(){
+
+    public void createProject() {
         newProject = Project.builder()
-                .name(Randomization.getRandomString(6))
-                .announcement(Randomization.getRandomString(12))
+                .name(Randomization.getRandomString(350))
+                .announcement(Randomization.getRandomString(10))
                 .typeOfProject(Randomization.getRandomType())
                 .isShowAnnouncement(true)
                 .build();
     }
 
-    @Test(description = "Check dialog window test")
-    public void addProjectTest(){
+    @Test
+    public void addProjectTest() {
         User user = User.builder()
                 .email(ReadProperties.getUsername())
                 .password(ReadProperties.getPassword())
@@ -39,8 +39,7 @@ public class DialogWindowTest extends BaseTest {
         createProject();
         addProjectPage.addProject(newProject);
         MainProjectsPage mainProjectsPage = new MainProjectsPage(driver);
-        mainProjectsPage.getDeleteButtonAnyProject(newProject.getName()).click();
 
-        Assert.assertTrue(mainProjectsPage.getDialogWindow().isDisplayed());
+        Assert.assertEquals(mainProjectsPage.lengthNameProject(newProject), 250);
     }
 }

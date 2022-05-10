@@ -1,18 +1,17 @@
-package tests.UiPositiveTests;
+package tests.UiNegativeTests;
 
 import baseEntities.BaseTest;
 import core.ReadProperties;
 import models.User;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
 
-public class PopUpMessageTest extends BaseTest {
+public class AnyDefectScreenShotTest extends BaseTest {
 
-    @Test(description = "Pop up window test")
-    public void popUpMessageTest(){
+    @Test
+    public void anyDefectScreenShotTest(){
         User user = User.builder()
                 .email(ReadProperties.getUsername())
                 .password(ReadProperties.getPassword())
@@ -22,12 +21,6 @@ public class PopUpMessageTest extends BaseTest {
         loginPage.login(user);
         DashboardPage dashboardPage = new DashboardPage(driver);
 
-        Actions action = new Actions(driver);
-        action
-                .moveToElement(dashboardPage.getPopUp())
-                .build()
-                .perform();
-
-        Assert.assertTrue(dashboardPage.getPopUpMessage().isDisplayed());
+        Assert.assertFalse(dashboardPage.getAddProjectButton().isDisplayed());
     }
 }

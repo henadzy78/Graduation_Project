@@ -14,10 +14,10 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
 public class UploadFileTest extends BaseTest {
-    Project createProject;
+    Project newProject;
 
     public void createProject(){
-        createProject = Project.builder()
+        newProject = Project.builder()
                 .name(Randomization.getRandomString(8))
                 .announcement(Randomization.getRandomString(16))
                 .typeOfProject(Randomization.getRandomType())
@@ -40,11 +40,11 @@ public class UploadFileTest extends BaseTest {
 
         AddProjectPage addProjectPage = new AddProjectPage(driver);
         createProject();
-        addProjectPage.addProject(createProject);
+        addProjectPage.addProject(newProject);
 
         MainProjectsPage mainProjectsPage = new MainProjectsPage(driver);
         mainProjectsPage.getDashboardButton().click();
-        dashboardPage.getNameProjectButton(createProject);
+        dashboardPage.getNameProjectButton(newProject);
         Thread.sleep(8000);
 
         OverviewProjectPage overviewProjectPage = new OverviewProjectPage(driver);
@@ -52,10 +52,11 @@ public class UploadFileTest extends BaseTest {
 
         AddTestCasePage addTestCasePage = new AddTestCasePage(driver);
         addTestCasePage.getFileUploadButton().click();
+        //addTestCasePage.getErrorMessageButton().click();
         addTestCasePage.getChooseFileUploadButton().click();
         Thread.sleep(8000);
 
-        StringSelection stringSelection = new StringSelection("C:\\Users\\Геннадий\\Desktop\\Scania\\Пульт.jpg");
+        StringSelection stringSelection = new StringSelection("C:\\Users\\Геннадий\\IdeaProjects\\Graduation_Project\\src\\test\\resources\\files\\robot logo.jpg");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 
         Robot robot = new Robot();
@@ -66,14 +67,12 @@ public class UploadFileTest extends BaseTest {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
+        //addTestCasePage.getErrorMessageButton().click();
         addTestCasePage.getFileUploadAttach().isDisplayed();
-        /*addTestCasePage.getAttachButton().click();
-        Thread.sleep(12000);
+        addTestCasePage.getAttachButton().click();
+        //Thread.sleep(12000);
 
-        /*Assert.assertTrue(addTestCasePage.getFileUploadImage().isDisplayed());
-        Thread.sleep(12000);
-
-         */
+        Assert.assertTrue(addTestCasePage.getFileUploadImage().isDisplayed());
     }
 }
 

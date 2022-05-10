@@ -10,11 +10,12 @@ public class AddTestCasePage extends BasePage {
 
     protected By titleTestCase_Selector = By.id("title");
     protected By entityAttachmentList_Selector = By.id("entityAttachmentListEmptyIcon");
-    protected By chooseFileUploadButton_Selector = By.id("libraryAttachmentsAddItem");
+    protected By chooseFileUploadButton_Selector = By.id("libraryAddAttachment");
     protected By addTestCaseButton_Selector = By.id("accept");
     protected By attachButton_Selector = By.id("attachmentNewSubmit");
-    protected By fileUploadAttach_Selector = By.id("libraryAttachment-09fdff1f-d365-46b1-b259-2ed219d06da7");
-    protected By fileUploadImage_Selector = By.id("attachment-0bde364a-e4f3-451a-9f47-cc0789dc279b");
+    protected By fileUploadAttach_Selector = By.xpath("//div[@title='robot logo.jpg']");
+    protected By fileUploadImage_Selector = By.xpath("//div[@title='robot logo.jpg\t(Click and hold to enter delete mode)']");
+    protected By errorMessage_Selector = By.xpath("//*[@id=\"messageDialog\"]/div[3]/a");
 
     public AddTestCasePage(WebDriver driver) {
         super(driver);
@@ -53,15 +54,16 @@ public class AddTestCasePage extends BasePage {
         waits.waitForVisibility(fileUploadImage_Selector);
         return driver.findElement(fileUploadImage_Selector);}
 
+    public WebElement getErrorMessageButton () {
+        waits.waitForVisibility(errorMessage_Selector);
+        return driver.findElement(errorMessage_Selector);
+    }
 
     public WebElement getAttachButton () {
         waits.waitForClickable(attachButton_Selector);
         return driver.findElement(attachButton_Selector);}
 
-
     public WebElement getChooseFileUploadButton () {
         waits.waitForVisibility(chooseFileUploadButton_Selector).isDisplayed();
-        return driver.findElement(chooseFileUploadButton_Selector);
-    }
-
+        return driver.findElement(chooseFileUploadButton_Selector);}
 }

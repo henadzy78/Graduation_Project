@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 public class MainProjectsPage extends BasePage {
     private static String ENDPOINT = "/admin/projects/overview";
     private static final By PAGE_OPENED_IDENTIFIER = By.xpath("//*[contains(text(),'Add Project')]");
+    private static String nameProject = "//*[contains(text(),'replace')]";
 
     protected By messageAddProject_Selector = By.xpath("//*[text() = 'Successfully added the new project.']");
     protected By checkboxDelete_Selector = By.xpath("//strong [. = 'Yes, delete this project (cannot be undone)']/following::input");
@@ -41,8 +42,8 @@ public class MainProjectsPage extends BasePage {
 
     public WebElement getDialogWindow(){return driver.findElement(DialogWindow_Selector);}
 
-    public WebElement findAnyProjectInProjects(Project project){
-        return driver.findElement(By.xpath("//*[. = '"+project.getName()+"']/following::td[2]"));}
+    //public WebElement findAnyProjectInProjects(Project project){
+      //  return driver.findElement(By.xpath("//*[. = '"+project.getName()+"']/following::td[2]"));}
 
     public WebElement getCheckBoxForConfirmationDelete() {return driver.findElement(checkboxDelete_Selector);}
 
@@ -51,12 +52,21 @@ public class MainProjectsPage extends BasePage {
     public WebElement getDashboardButton(){return driver.findElement(dashboardButton_Selector);}
 
     public void deleteProject (Project project) {
-        findAnyProjectInProjects(project).click();
+        getDeleteButtonAnyProject(project.getName()).click();
         getCheckBoxForConfirmationDelete().click();
         getButtonOk().click();
     }
 
-    public void dialogWindowForm(Project project){
-        driver.findElement(By.xpath("//*[. = '"+project.getName()+"']/following::td[2]")).click();
+    //public void dialogWindowForm(Project project){
+    //    driver.findElement(By.xpath("//*[. = '"+project.getName()+"']/following::td[2]")).click();
+    //}
+
+    public int lengthNameProject (Project project) {
+        WebElement result = driver.findElement(By.xpath(nameProject.replace("replace", project.getName().substring(0,100))));
+        int lengthName =  result.getText().length();
+        return lengthName;
+    }
+    public WebElement getDeleteButtonAnyProject(String nameProject) {
+        return driver.findElement(By.cssSelector("a[onclick*='" + nameProject + "'] .icon-small-delete"));
     }
 }

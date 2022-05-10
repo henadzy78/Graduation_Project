@@ -13,10 +13,10 @@ import pages.MainProjectsPage;
 import utils.Randomization;
 
 public class CreateDeleteProjectTest extends BaseTest {
-    Project createProject;
+    Project newProject;
 
     public void createProject(){
-        createProject = Project.builder()
+        newProject = Project.builder()
                 .name(Randomization.getRandomString(8))
                 .announcement(Randomization.getRandomString(16))
                 .typeOfProject(Randomization.getRandomType())
@@ -37,7 +37,7 @@ public class CreateDeleteProjectTest extends BaseTest {
         dashboardPage.getAddProjectButton().click();
         AddProjectPage addProjectPage = new AddProjectPage(driver);
         createProject();
-        addProjectPage.addProject(createProject);
+        addProjectPage.addProject(newProject);
         MainProjectsPage mainProjectsPage = new MainProjectsPage(driver);
 
         Assert.assertTrue(mainProjectsPage.getMessageAddProject().isDisplayed());
@@ -46,7 +46,7 @@ public class CreateDeleteProjectTest extends BaseTest {
     @Test(dependsOnMethods = "addProjectTest", description = "Delete project test")
     public void deleteProjectTest(){
         MainProjectsPage mainProjectsPage = new MainProjectsPage(driver);
-        mainProjectsPage.deleteProject(createProject);
+        mainProjectsPage.deleteProject(newProject);
 
         Assert.assertTrue(mainProjectsPage.getMessageDeleteProject().isDisplayed());
     }
