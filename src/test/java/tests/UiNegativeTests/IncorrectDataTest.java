@@ -20,5 +20,7 @@ public class IncorrectDataTest extends BaseTest {
 
         Assert.assertEquals(loginPage.getNegativeMessage().getText(),
                 "Email/Login or Password is incorrect. Please try again.");
+
+        Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
     }
 }

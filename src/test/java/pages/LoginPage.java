@@ -15,6 +15,7 @@ public class LoginPage extends BasePage {
     protected By login_Selector = By.id("button_primary");
     protected By negativeMessage_Selector = By.className("error-text");
     protected By limitValueMessage_Selector = By.className("error-text");
+    protected By errorMessage_Selector = By.xpath("//span[@class='error-on-top']");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -42,9 +43,11 @@ public class LoginPage extends BasePage {
         return driver.findElement(login_Selector);
     }
 
-    public WebElement getNegativeMessage(){return driver.findElement(negativeMessage_Selector);}
+    public WebElement getNegativeMessage() {return driver.findElement(negativeMessage_Selector);}
 
-    public WebElement getLimitValueMessage(){return driver.findElement(limitValueMessage_Selector);}
+    public WebElement getLimitValueMessage() {return driver.findElement(limitValueMessage_Selector);}
+
+    public WebElement getErrorMessage() {return driver.findElement(errorMessage_Selector);}
 
     public void login(User user) {
         getEmailField().sendKeys(user.getEmail());
