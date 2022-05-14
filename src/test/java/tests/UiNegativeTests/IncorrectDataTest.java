@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 
 public class IncorrectDataTest extends BaseTest {
+    //
 
     @Test(description = "Incorrect data entry test")
     public void incorrectDataTest() {
